@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MachineEditDlg" widgetVar="MachineEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditMachineTitle}">
+            <h:form id="MachineEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{machineController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditMachineLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{machineController.selected.id}" title="#{bundle.EditMachineTitle_id}" required="true" requiredMessage="#{bundle.EditMachineRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditMachineLabel_dateAchat}" for="dateAchat" />
+                        <p:calendar id="dateAchat" pattern="MM/dd/yyyy" value="#{machineController.selected.dateAchat}" title="#{bundle.EditMachineTitle_dateAchat}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditMachineLabel_marque}" for="marque" />
+                        <p:inputText id="marque" value="#{machineController.selected.marque}" title="#{bundle.EditMachineTitle_marque}" />
+                        <p:outputLabel value="#{bundle.EditMachineLabel_prix}" for="prix" />
+                        <p:inputText id="prix" value="#{machineController.selected.prix}" title="#{bundle.EditMachineTitle_prix}" />
+                        <p:outputLabel value="#{bundle.EditMachineLabel_reference}" for="reference" />
+                        <p:inputText id="reference" value="#{machineController.selected.reference}" title="#{bundle.EditMachineTitle_reference}" />
+                        <p:outputLabel value="#{bundle.EditMachineLabel_employe}" for="employe" />
+                        <p:selectOneMenu id="employe" value="#{machineController.selected.employe}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{employeController.itemsAvailableSelectOne}"
+                                           var="employeItem"
+                                           itemValue="#{employeItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{machineController.update}" value="#{bundle.Save}" update="display,:MachineListForm:datalist,:growl" oncomplete="handleSubmit(args, 'MachineEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="MachineEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

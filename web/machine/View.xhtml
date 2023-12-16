@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MachineViewDlg" widgetVar="MachineViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewMachineTitle}">
+            <h:form id="MachineViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{machineController.selected != null}">
+                        <h:outputText value="#{bundle.ViewMachineLabel_id}"/>
+                        <h:outputText value="#{machineController.selected.id}" title="#{bundle.ViewMachineTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewMachineLabel_dateAchat}"/>
+                        <h:outputText value="#{machineController.selected.dateAchat}" title="#{bundle.ViewMachineTitle_dateAchat}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewMachineLabel_marque}"/>
+                        <h:outputText value="#{machineController.selected.marque}" title="#{bundle.ViewMachineTitle_marque}"/>
+                        <h:outputText value="#{bundle.ViewMachineLabel_prix}"/>
+                        <h:outputText value="#{machineController.selected.prix}" title="#{bundle.ViewMachineTitle_prix}"/>
+                        <h:outputText value="#{bundle.ViewMachineLabel_reference}"/>
+                        <h:outputText value="#{machineController.selected.reference}" title="#{bundle.ViewMachineTitle_reference}"/>
+                        <h:outputText value="#{bundle.ViewMachineLabel_employe}"/>
+                        <h:outputText value="#{machineController.selected.employe}" title="#{bundle.ViewMachineTitle_employe}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="MachineViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
